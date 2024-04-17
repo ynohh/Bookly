@@ -1,0 +1,83 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'bookly/base.css' %}" />
+    {% block styles %} {% endblock %}
+    <title>{% block title %}Bookly{% endblock %}</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container-fluid">
+        <svg
+          width="29px"
+          height="29px"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          stroke="#6366f1"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M4 19V6.2C4 5.0799 4 4.51984 4.21799 4.09202C4.40973 3.71569 4.71569 3.40973 5.09202 3.21799C5.51984 3 6.0799 3 7.2 3H16.8C17.9201 3 18.4802 3 18.908 3.21799C19.2843 3.40973 19.5903 3.71569 19.782 4.09202C20 4.51984 20 5.0799 20 6.2V17H6C4.89543 17 4 17.8954 4 19ZM4 19C4 20.1046 4.89543 21 6 21H20M9 7H15M9 11H15M19 17V21"
+              stroke="#6366f1"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </g>
+        </svg>
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/index">Home</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/books_list">Livros</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/books">Resenhas</a>
+            </li>
+
+            {% if user.is_staff %}
+            <li class="nav-item">
+              <a class="nav-link" href="/registrate_users">Usuários</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="navbar user-info">
+          <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <!-- <span class="navbar-text">{{user.username}} | </span> -->
+            <div class="div-auth">
+              <li class="nav-item">
+                <a class="nav-link auth" href="/user_logout">Logout</a>
+              </li>
+            </div>
+            {% else %}
+            <div class="div-auth">
+              <li class="nav-item">
+                <a class="nav-link auth" href="/login">Login</a>
+              </li>
+            </div>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">{% block content %}{% endblock %}</div>
+    <script src="{% static 'bookly/base.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{% extends 'bookly/index.html' %}
+{% load static %}
+{% block title %}Registrar Usuários{% endblock %}
+{% block content %}
+<form method="POST">
+  {% csrf_token %}{{ form.as_p }}
+  <button type="submit" class="btn btn-success">Registrar</button>
+</form>
+{% endblock %}
