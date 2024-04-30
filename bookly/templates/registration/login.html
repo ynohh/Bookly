@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'bookly/css/login.css' %}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <div class="login">
+        <form class="form login-form" method="POST">
+          <h1 class="login-title">Bem-vindo ao <br> Bookly!</h1>
+          {% csrf_token %}
+          <div class="input-fields">
+            {{ form.as_p }}
+            <p class="sign-up-link">Não possui uma conta? <a href="/sign_up/">Cadastre-se</a></p>
+            <button type="submit" class="btn btn-success">Entrar</button>
+          </div>
+        </form>
+      </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html> 
+
+

@@ -1,0 +1,76 @@
+{% extends 'bookly/base.html' %} 
+{% load widget_tweaks %} 
+{% load static %} 
+{% block styles %}
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<link rel="stylesheet" href="{% static 'bookly/css/reviews.css' %}" />
+{% endblock %} {% block title %}{{ book.title }}{% endblock %} 
+{% block content %}
+<div class="main">
+  <h2>Resenhas</h2>
+  {% if user.is_authenticated %}
+  <button class="btn btn-show-modal">+</button>
+    <div class="modal hidden">
+        <button class="close-modal">&times;</button>
+        <form method="POST" class="form">
+          <div class="form-fields">
+            {% csrf_token %}
+            <div class=" fields rating-section">
+              {{ form.rating.label_tag }}
+              {{ form.rating }}
+            </div>
+            <div class="fields title-section">
+              {{ form.title.label_tag }}
+              {{ form.title }}
+            </div>
+            <div class="fields review-section">
+              {{ form.review_text.label_tag }}
+              {{ form.review_text }}
+            </div>
+          </div>
+            <button type="submit" class="btn btn-publish">Publicar</button>
+          </form>
+    </div>
+    {% endif %}
+
+  <div class="overlay hidden"></div> 
+
+  {% for review in reviews %}
+  <div class="card mt-2">
+    <div class="card-header">
+        <strong>@{{ review.user }}</strong>
+        {% if user == review.user or perms.bookly.delete_reviews %}
+        <form method="POST">
+          {% csrf_token %}
+          <button
+            type="submit"
+            class="bnt btn-danger"
+            name="review-id"
+            value="{{ review.id }}"
+          >
+            Excluir
+          </button>
+        </form>
+        {% endif %}</div>
+    <div class="card-body">
+      <div class="card-infos">
+        <h5 class="card-title">{{ review.title }}</h5>
+        <p>{{ review.review_text}}</p>
+      </div>
+    </div>
+    <div class="card-footer"> 
+      <p>Nota: {{ review.rating }}</p>
+      <p>{{ review.created_at }}</p>
+    </div>
+  </div>
+  {% empty %}
+  <p>Este livro não possui resenhas ainda :/</p>
+  {% endfor %}
+</divisibleby>
+{% block scripts %}
+    <script src="{% static 'bookly/js/newReviewModal.js' %}"></script>
+{% endblock %}
+{% endblock %}

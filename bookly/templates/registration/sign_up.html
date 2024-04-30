@@ -1,0 +1,37 @@
+{% load static %}
+{% load widget_tweaks %} 
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'bookly/css/sign_up.css' %}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <div class="sign-up">
+        <h1 class="title">Cadastro</h1>
+        <form class="form sign-up-form" method="POST">
+          {% csrf_token %}
+          <div class="input-fields">
+            {{ form.as_p.label_tag }}
+            {{ form.as_p }}
+            <p class="login-link">Já possui uma conta? <a href="/login">Entre aqui</a></p>
+            <button type="submit" class="btn btn-success">Cadastrar</button>
+          </div>
+        </form>
+      </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html> 
+
+

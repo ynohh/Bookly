@@ -1,0 +1,13 @@
+{% extends 'bookly/base.html' %} {% load static %} {% block styles %}
+<link rel="stylesheet" href="{% static 'bookly/css/index.css' %}" />
+{% endblock %} {% block title%}Bookly{%endblock %} {% block content %}
+
+<div class="container">
+  <h1>Bem-vindo ao Bookly!</h1>
+  <p>Clique no botão abaixo para resenhar sobre os seus livros preferidos!</p>
+  <a href="/books">
+    <button>Lista de Livros</button>
+  </a>
+</div>
+
+{% endblock %}
